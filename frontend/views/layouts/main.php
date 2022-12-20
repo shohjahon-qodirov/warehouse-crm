@@ -98,7 +98,7 @@ AppAsset::register($this);
                     Tovarlar
                 </li>
                 <li <?php if ($url == '/product/index' || $controller == 'product'){?>class="active-page"<?php }?>>
-                    <a href="<?=Url::to(['product/index'])?>">
+                    <a href="/product/index">
                         <i data-feather="box"></i>
                         Barcha tovarlar
                     </a>
