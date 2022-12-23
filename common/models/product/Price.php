@@ -12,6 +12,7 @@ use Yii;
  * @property int $type
  * @property int $price
  * @property int $new_price
+ * @property int $created
  */
 class Price extends \yii\db\ActiveRecord
 {
@@ -30,7 +31,7 @@ class Price extends \yii\db\ActiveRecord
     {
         return [
             [['product_item_id', 'type', 'price', 'new_price'], 'required'],
-            [['product_item_id', 'type', 'price', 'new_price'], 'integer'],
+            [['product_item_id', 'type', 'price', 'new_price', 'created'], 'integer'],
         ];
     }
 
@@ -41,10 +42,15 @@ class Price extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_item_id' => 'Product Item ID',
-            'type' => 'Type',
-            'price' => 'Price',
-            'new_price' => 'New Price',
+            'product_item_id' => 'Tovar',
+            'type' => 'Turi',
+            'price' => 'Narxi',
+            'new_price' => 'Sotiladigan narx',
+            'created' => 'Yaratilgan sana',
         ];
+    }
+
+    public function getProduct() {
+        return $this->hasOne(ProductItem::className(), ['id' => 'product_item_id']);
     }
 }

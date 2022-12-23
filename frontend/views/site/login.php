@@ -1,41 +1,55 @@
 <?php
 
-/** @var yii\web\View $this */
-/** @var yii\bootstrap5\ActiveForm $form */
-/** @var \common\models\LoginForm $model */
+/* @var $this yii\web\View */
+/* @var $form yii\bootstrap4\ActiveForm */
+/* @var $model \common\models\LoginForm */
 
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Login';
+$this->title = 'Kirish sahifasi';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-12 col-lg-4">
+            <div class="card login-box-container">
+                <div class="card-body">
+                    <div class="authent-logo">
+                        <img src="<?=Yii::$app->request->baseUrl?>/static/logo.jpg" style="background-size: cover; width: 100px;" alt="Logo">
+                    </div>
+                    <div class="authent-text">
+                        <p>
+                            ZealSoft-ga xush kelibsiz
+                        </p>
+                        <p>
+                            Iltimos, shaxsiy hisobingizga kiring.
+                        </p>
+                    </div>
 
-    <p>Please fill out the following fields to login:</p>
+                    <?php $form = ActiveForm::begin([
+                        'id' => 'login-form',
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="my-1 mx-0" style="color:#999;">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
-                    <br>
-                    Need new verification email? <?= Html::a('Resend', ['site/resend-verification-email']) ?>
+                    ]); ?>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <?= $form->field($model, 'username')->textInput(['placeholder' => 'Login', 'autofocus' => true])->label(false) ?>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Parol'])->label(false) ?>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <?= $form->field($model, 'rememberMe')->checkbox()->label('Eslab qolish') ?>
+                    </div>
+                    <div class="d-grid">
+                        <?= Html::submitButton('Kirish', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    </div>
+                    <?php ActiveForm::end(); ?>
                 </div>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+            </div>
         </div>
     </div>
 </div>

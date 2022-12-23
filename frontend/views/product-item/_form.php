@@ -2,36 +2,54 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /** @var yii\web\View $this */
 /** @var common\models\product\ProductItem $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
-
-<div class="product-item-form">
-
+<div class="card-body">
+    <h5 class="card-title">
+        Forma
+    </h5>
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'product_category_id')->textInput() ?>
-
-    <?= $form->field($model, 'product_type_id')->textInput() ?>
-
-    <?= $form->field($model, 'currency_id')->textInput() ?>
-
-    <?= $form->field($model, 'vendor_code')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'barcode')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'price')->textInput() ?>
-
-    <?= $form->field($model, 'new_price')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <div class="row">
+        <?php if ($type == 'create'):?>
+            <div class="col-lg-6 col-sm-12">
+                <?= $form->field($model, 'product_category_id')->dropDownList(ArrayHelper::map(\common\models\product\ProductCategory::find()->all(), 'id', 'name'),
+                    [
+                        'prompt' => 'Tanlash',
+                    ]); ?>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <?= $form->field($model, 'vendor_code')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <?= $form->field($model, 'new_price')->textInput(['maxlength' => true]) ?>
+            </div>
+        <?php elseif ($type == 'update'):?>
+            <div class="col-lg-4 col-sm-12">
+                <?= $form->field($model, 'product_category_id')->dropDownList(ArrayHelper::map(\common\models\product\ProductCategory::find()->all(), 'id', 'name'),
+                    [
+                        'prompt' => 'Tanlash',
+                    ]); ?>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <?= $form->field($model, 'vendor_code')->textInput(['maxlength' => true]) ?>
+            </div>
+        <?php endif;?>
+        <div class="col-lg-12 col-sm-12" style="padding-top: 20px">
+            <?= Html::submitButton('Saqlash', ['class' => 'btn btn-outline-success btn-block']) ?>
+        </div>
     </div>
-
     <?php ActiveForm::end(); ?>
-
 </div>

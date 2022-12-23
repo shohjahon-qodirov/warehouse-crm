@@ -18,15 +18,9 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'name') ?>
-
-    <?= $form->field($model, 'status') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="position-relative">
+        <input type="text" id="productcategorysearch-name" style="max-width: 800px; min-width: 500px" name="ProductCategorySearch[name]" class="form-control" placeholder="Izlash..." value="<?=$model->name?>">
+        <i class="bx bx-search-alt search-icon"></i>
     </div>
 
     <?php ActiveForm::end(); ?>

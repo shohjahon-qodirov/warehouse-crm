@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\product\Price;
 use common\models\product\ProductItem;
 use common\models\product\ProductItemSearch;
 use yii\web\Controller;
@@ -48,16 +49,39 @@ class ProductItemController extends Controller
     }
 
     /**
-     * Displays a single ProductItem model.
+     * Displays a single ProductCategory model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+//    public function actionView($id)
+//    {
+//        return $this->render('view', [
+//            'model' => $this->findModel($id),
+//        ]);
+//    }
+
+    public function actionPrice($id) {
+        $priceItems = Price::find()->where(['product_item_id' => $id])->all();
+        $model = ProductItem::find()->where(['id' => $id])->one();
+        if (!empty($model)){
+            $priceForm = new Price();
+            $priceForm->product_item_id = $id;
+            $priceForm->created = time();
+            if ($priceForm->load($this->request->post()) && $priceForm->save()) {
+                $model->price = $priceForm->price;
+                $model->new_price = $priceForm->new_price;
+                $model->save();
+                $this->refresh();
+            }
+            return $this->render('price', [
+                'priceItems' => $priceItems,
+                'model' => $model,
+                'priceForm' => $priceForm,
+            ]);
+        } else {
+            throw new NotFoundHttpException('404 sahifa topilmadi!');
+        }
     }
 
     /**
@@ -68,10 +92,21 @@ class ProductItemController extends Controller
     public function actionCreate()
     {
         $model = new ProductItem();
+        $model->product_type_id = 0;
+        $model->currency_id = 0;
+        $model->barcode = '0';
 
         if ($this->request->isPost) {
+            $price = new Price();
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                $price->product_item_id = $model->id;
+                $price->type = 0;
+                $price->price = $model->price;
+                $price->new_price = $model->new_price;
+                $price->created = time();
+                if ($price->save()){
+                    return $this->redirect(['index']);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -94,7 +129,7 @@ class ProductItemController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

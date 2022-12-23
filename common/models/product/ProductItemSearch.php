@@ -18,7 +18,7 @@ class ProductItemSearch extends ProductItem
     {
         return [
             [['id', 'product_category_id', 'product_type_id', 'currency_id', 'price', 'new_price'], 'integer'],
-            [['vendor_code', 'name', 'barcode'], 'safe'],
+            [['vendor_code', 'name', 'barcode', 'search'], 'safe'],
         ];
     }
 
@@ -68,6 +68,7 @@ class ProductItemSearch extends ProductItem
 
         $query->andFilterWhere(['like', 'vendor_code', $this->vendor_code])
             ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like','CONCAT_WS(" ",name,vendor_code,barcode,new_price)', $this->search])
             ->andFilterWhere(['like', 'barcode', $this->barcode]);
 
         return $dataProvider;

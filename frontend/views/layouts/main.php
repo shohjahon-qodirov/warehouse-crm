@@ -5,8 +5,11 @@
 
 use common\widgets\Alert;
 use frontend\assets\AppAsset;
+use yii\bootstrap5\Breadcrumbs;
+use yii\bootstrap5\Html;
+use yii\bootstrap5\Nav;
+use yii\bootstrap5\NavBar;
 use yii\helpers\Url;
-use yii\helpers\Html;
 
 $url = Yii::$app->request->url;
 $controller = Yii::$app->controller->id;
@@ -23,14 +26,14 @@ AppAsset::register($this);
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
-    <body <?php if (!Yii::$app->user->isGuest):?>class="login-page"<?php endif;?>>
+    <body <?php if (Yii::$app->user->isGuest):?>class="login-page"<?php endif;?>>
     <?php $this->beginBody() ?>
     <div class='loader'>
         <div class='spinner-grow text-primary' role='status'>
             <span class='sr-only'>Yuklanmoqda...</span>
         </div>
     </div>
-    <?php if (Yii::$app->user->isGuest):?>
+    <?php if (!Yii::$app->user->isGuest):?>
     <div class="page-container">
         <div class="page-header">
             <nav class="navbar navbar-expand-lg d-flex justify-content-between">
@@ -97,10 +100,16 @@ AppAsset::register($this);
                 <li class="sidebar-title">
                     Tovarlar
                 </li>
-                <li <?php if ($url == '/product/index' || $controller == 'product'){?>class="active-page"<?php }?>>
-                    <a href="/product/index">
+                <li <?php if ($url == '/product-item/index' || $controller == 'product-item'){?>class="active-page"<?php }?>>
+                    <a href="<?=Url::to(['product-item/index'])?>">
                         <i data-feather="box"></i>
                         Barcha tovarlar
+                    </a>
+                </li>
+                <li <?php if ($url == '/product-category/index' || $controller == 'product-category'){?>class="active-page"<?php }?>>
+                    <a href="<?=Url::to(['product-category/index'])?>">
+                        <i data-feather="book"></i>
+                        Tovar kategoriyalari
                     </a>
                 </li>
                 <li class="sidebar-title">

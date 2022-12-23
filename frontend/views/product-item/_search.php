@@ -18,27 +18,9 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'product_category_id') ?>
-
-    <?= $form->field($model, 'product_type_id') ?>
-
-    <?= $form->field($model, 'currency_id') ?>
-
-    <?= $form->field($model, 'vendor_code') ?>
-
-    <?php // echo $form->field($model, 'name') ?>
-
-    <?php // echo $form->field($model, 'barcode') ?>
-
-    <?php // echo $form->field($model, 'price') ?>
-
-    <?php // echo $form->field($model, 'new_price') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="position-relative">
+        <input type="text" id="productcategorysearch-search" style="max-width: 800px; min-width: 500px" name="ProductItemSearch[search]" class="form-control" placeholder="Izlash..." value="<?=$model->search?>">
+        <i class="bx bx-search-alt search-icon"></i>
     </div>
 
     <?php ActiveForm::end(); ?>
