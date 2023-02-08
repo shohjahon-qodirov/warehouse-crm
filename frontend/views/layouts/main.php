@@ -91,8 +91,8 @@ AppAsset::register($this);
                 <li class="sidebar-title">
                     Do'kon
                 </li>
-                <li <?php if ($url == '/order/index' || $controller == 'order'){?>class="active-page"<?php }?>>
-                    <a href="<?=Url::to(['order/index'])?>">
+                <li <?php if ($url == '/orders/index' || $controller == 'orders'){?>class="active-page"<?php }?>>
+                    <a href="<?=Url::to(['orders/index'])?>">
                         <i data-feather="shopping-cart"></i>
                         Kassa
                     </a>
