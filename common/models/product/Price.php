@@ -51,6 +51,6 @@ class Price extends \yii\db\ActiveRecord
     }
 
     public function getProduct() {
-        return $this->hasOne(ProductItem::className(), ['id' => 'product_item_id']);
+        return $this->hasOne(Product::className(), ['id' => 'product_item_id']);
     }
 }

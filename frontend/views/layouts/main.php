@@ -100,16 +100,10 @@ AppAsset::register($this);
                 <li class="sidebar-title">
                     Tovarlar
                 </li>
-                <li <?php if ($url == '/product-item/index' || $controller == 'product-item'){?>class="active-page"<?php }?>>
-                    <a href="<?=Url::to(['product-item/index'])?>">
+                <li <?php if ($url == '/product/index' || $controller == 'product'){?>class="active-page"<?php }?>>
+                    <a href="<?=Url::to(['product/index'])?>">
                         <i data-feather="box"></i>
                         Barcha tovarlar
-                    </a>
-                </li>
-                <li <?php if ($url == '/product-category/index' || $controller == 'product-category'){?>class="active-page"<?php }?>>
-                    <a href="<?=Url::to(['product-category/index'])?>">
-                        <i data-feather="book"></i>
-                        Tovar kategoriyalari
                     </a>
                 </li>
                 <li class="sidebar-title">
@@ -121,8 +115,8 @@ AppAsset::register($this);
                         Barcha mijozlar
                     </a>
                 </li>
-                <li <?php if ($url == '/client/index' || $controller == 'client'){?>class="active-page"<?php }?>>
-                    <a href="<?=Url::to(['client/index'])?>">
+                <li <?php if ($url == '/client/owing' || $controller == 'owing'){?>class="active-page"<?php }?>>
+                    <a href="<?=Url::to(['client/owing'])?>">
                         <i data-feather="user-minus"></i>
                         Qarzdor mijozlar
                     </a>
