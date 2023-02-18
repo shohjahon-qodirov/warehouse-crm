@@ -15,11 +15,8 @@ use yii\helpers\ArrayHelper;
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
         <?php if ($type == 'create'):?>
-            <div class="col-lg-6 col-sm-12">
-                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-            </div>
-            <div class="col-lg-6 col-sm-12">
-                <?= $form->field($model, 'vendor_code')->textInput(['maxlength' => true]) ?>
+            <div class="col-lg-12 col-sm-12">
+                <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'autofocus' => true]) ?>
             </div>
             <div class="col-lg-6 col-sm-12">
                 <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
@@ -28,11 +25,8 @@ use yii\helpers\ArrayHelper;
                 <?= $form->field($model, 'new_price')->textInput(['maxlength' => true]) ?>
             </div>
         <?php elseif ($type == 'update'):?>
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-12 col-sm-12">
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-            </div>
-            <div class="col-lg-6 col-sm-12">
-                <?= $form->field($model, 'vendor_code')->textInput(['maxlength' => true]) ?>
             </div>
         <?php endif;?>
         <div class="col-lg-12 col-sm-12" style="padding-top: 20px">

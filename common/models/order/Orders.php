@@ -3,6 +3,7 @@
 namespace common\models\order;
 
 use Yii;
+use common\models\client\Client;
 
 /**
  * This is the model class for table "orders".
@@ -16,6 +17,8 @@ use Yii;
  */
 class Orders extends \yii\db\ActiveRecord
 {
+
+    public $search;
     /**
      * {@inheritdoc}
      */
@@ -41,12 +44,49 @@ class Orders extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'client_id' => 'Client ID',
-            'sum' => 'Sum',
-            'status' => 'Status',
-            'user_id' => 'User ID',
-            'created' => 'Created',
+            'id' => 'Chek raqami',
+            'client_id' => 'Mijoz',
+            'sum' => 'Jami (so\'m)',
+            'status' => 'Holati',
+            'user_id' => 'Foydalanuvchi',
+            'created' => 'Yaratilgan vaqti',
         ];
     }
+
+    public function getClient()
+    {
+        return $this->hasOne(Client::className(), ['id' => 'client_id']);
+    }
+
+    public static function getStatusFilter()
+    {
+        return [
+            0 => 'Jarayonda',
+            1 => 'Muaffaqiyatli',
+            2 => 'Bekor qilingan',
+            3 => 'Xatolik',
+        ];
+    }
+
+    public static function getStatusName($status)
+    {
+        switch ($status) {
+            case 0:
+                return '<span class="badge bg-warning p-2">Jarayonda</span>';
+                break;
+            case 1:
+                return '<span class="badge bg-success p-2">Muaffaqiyatli</span>';
+                break;
+            case 2:
+                return '<span class="badge bg-danger p-2">Bekor qilingan</span>';
+                break;
+            case 3:
+                return '<span class="badge bg-danger p-2">Xatolik</span>';
+                break;
+            default:
+                return '<span class="badge bg-warning p-2">Jarayonda</span>';
+                break;
+        }
+    }
+
 }

@@ -89,12 +89,12 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li class="sidebar-title">
-                    Do'kon
+                    Buyurtmalar
                 </li>
                 <li <?php if ($url == '/orders/index' || $controller == 'orders'){?>class="active-page"<?php }?>>
                     <a href="<?=Url::to(['orders/index'])?>">
                         <i data-feather="shopping-cart"></i>
-                        Kassa
+                        Barcha buyurtmalar
                     </a>
                 </li>
                 <li class="sidebar-title">

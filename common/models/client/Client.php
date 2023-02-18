@@ -48,4 +48,12 @@ class Client extends \yii\db\ActiveRecord
             'address' => 'Manzili',
         ];
     }
+
+    public static function getFullInfo() {
+        return self::find()->select(['CONCAT(name, " ", address, " ", phone) AS fullInfo', 'id'])->indexBy('id')->column();
+    }
+
+    public static function getFilter() {
+        return self::find()->select(['CONCAT(name, " ", phone) AS fullInfo', 'id'])->indexBy('id')->column();
+    }
 }

@@ -4,9 +4,11 @@ namespace frontend\controllers;
 
 use common\models\order\Orders;
 use common\models\order\OrdersSearch;
+use common\models\product\Product;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -60,6 +62,20 @@ class OrdersController extends Controller
         ]);
     }
 
+    public function actionGetProduct() {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $productItems = Product::find()->all();
+        $productList = [];
+        foreach ($productItems as $productItem) {
+            $productList[] = [
+                'id' => $productItem->id,
+                'name' => $productItem->name,
+                'price' => $productItem->price,
+            ];
+        }
+        return $productList;
+    }
+
     /**
      * Creates a new Orders model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -68,6 +84,10 @@ class OrdersController extends Controller
     public function actionCreate()
     {
         $model = new Orders();
+        $model->sum = 0;
+        $model->status = 0;
+        $model->user_id = Yii::$app->user->id;
+        $model->created = time();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {

@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <div class="position-relative">
-        <input type="text" id="productcategorysearch-search" style="max-width: 800px; min-width: 500px" name="ProductItemSearch[search]" class="form-control" placeholder="Izlash..." value="<?=$model->search?>">
+        <input type="text" id="productsearch-search" style="max-width: 800px; min-width: 500px" name="ProductSearch[search]" class="form-control" placeholder="Izlash..." value="<?=$model->search?>">
         <i class="bx bx-search-alt search-icon"></i>
     </div>
 
